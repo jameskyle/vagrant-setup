@@ -9,11 +9,11 @@ case $::osfamily {
     $hostname_content = 'NETWORKING=yes\nHOSTNAME=vagrant.virtual\n'
     $interface_file   = '/etc/sysconfig/network-scripts/ifcfg-eth0'
     $interface_source = "${url_root}/${::osfamily}/ifcfg-eth0"
-  },
+  }
   'Debian': {
     $upgrade  = '/usr/bin/apt-get update && /usr/bin/apt-get dist-upgrade -y'
     $packages = ['gcc', 'make', 'linux-headers']
-  },
+  }
 }
 
 define yum::groupremove ($name = $title) {
@@ -39,7 +39,7 @@ class vagrant::setup {
       ]:}
 
       Yum::Groupremove<| |> -> Exec[$upgrade]
-    },
+    }
     'Debian': {
       notify {'TODO: remove unnecessary debian packages':}
     }
